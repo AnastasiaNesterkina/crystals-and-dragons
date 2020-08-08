@@ -17,34 +17,27 @@ class Context {
         self.M = M
         self.N = N
         
+        // Generate rooms
         for i in 0...N-1 {
             for j in 0...M-1 {
                 self.rooms.append(Room(id: i * M + j))
-                rooms.last?.generateDoors(M, N)
                 rooms.last?.generateThings()
             }
         }
         
-        // Connect unlinking doors in rooms
-        // TO DO: try escape repeating operations
+        // Generate doors and connect unlinking doors in rooms
         for room in rooms {
-            for i in 0...room.doors.count-1 {
-                let door = room.doors[i]
-                if door != -1 {
-                    var id = room.id
-                    switch i {
-                    case 0: id -= 1
-                    case 1: id += 1
-                    case 2: id += M
-                    case 3: id -= M
-                    default: break
-                    }
-                    rooms[door].doors[id] = room.id
-                }
+            // Result of generation is array of rooms in which some doors
+            // must be installed: [[idRoom,idDoor], ...]
+            let idChanges = room.generateDoors(M, N)
+            for elem in idChanges {
+                    rooms[elem[0]].doors[elem[1]] = room.id
             }
         }
         
         let playersRoom = Int.random(in: 0...M * N - 1)
         self.player = Player(idRoom: playersRoom)
+        
+        //TO DO: find the place for key and box; calculate steps
     }
 }

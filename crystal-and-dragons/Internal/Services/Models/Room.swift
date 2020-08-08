@@ -18,8 +18,11 @@ class Room {
         self.id = id
     }
     
-    func generateDoors(_ M: Int, _ N: Int) {
+    func generateDoors(_ M: Int, _ N: Int) -> [[Int]]{
         doors = [-1, -1, -1, -1]
+        // Result of generateDoors is array of rooms in which some doors
+        // must be installed: [[idRoom,idDoor], ...]
+        var idChanges: [[Int]] = []
         // rooms count > 1
         if N > 1 && M > 1 {
             // determine in which direction the doors can be installed
@@ -37,23 +40,32 @@ class Room {
             if i == N - 1 {
                 exceptions.insert(2)
             }
-            let sides: Set<Int> = [0, 1, 2, 3] //left, right, bottom, top
+            let sides: Set<Int> = [0, 1, 2, 3] // left, right, bottom, top
             let directions = sides.subtracting(exceptions)
             
-            // install the doors
+            // Install the doors
             let doorsCount = Int.random(in: 1...directions.count)
             for _ in 0...doorsCount {
                 let direction = directions.randomElement()
                 switch direction {
-                case 0: doors[0] = id - 1
-                case 1: doors[1] = id + 1
-                case 2: doors[2] = id - M
-                case 3: doors[3] = id + M
+                case 0:
+                    doors[0] = id - 1
+                    idChanges.append([id - 1, 1])
+                case 1:
+                    doors[1] = id + 1
+                    idChanges.append([id + 1, 0])
+                case 2:
+                    doors[2] = id - M
+                    idChanges.append([id - M, 3])
+                case 3:
+                    doors[3] = id + M
+                    idChanges.append([id + M, 2])
                 default:
                     break
                 }
             }
         }
+        return idChanges
     }
     
     func generateThings() {
