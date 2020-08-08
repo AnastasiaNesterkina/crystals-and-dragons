@@ -35,9 +35,30 @@ class Context {
             }
         }
         
-        let playersRoom = Int.random(in: 0...M * N - 1)
-        self.player = Player(idRoom: playersRoom)
+        let playerRoom = Int.random(in: 0...M * N - 1)
+        self.player = Player(idRoom: playerRoom)
         
         //TO DO: find the place for key and box; calculate steps
+        var playerRooms: [Int] = [playerRoom]
+        for room in playerRooms {
+            for door in rooms[room].doors {
+                if door != -1 && !playerRooms.contains(door) {
+                    playerRooms.append(room)
+                }
+            }
+        }
+        let idBoxRoom = playerRooms[Int.random(in: 0..<playerRooms.count)]
+        let idKeyRoom = playerRooms[Int.random(in: 0..<playerRooms.count)]
+        rooms[idBoxRoom].things.append(Thing(name: .box,
+                                             coordinate: Point(x: 50, y: 50)))
+        rooms[idKeyRoom].things.append(Thing(name: .key,
+                                             coordinate: Point(x: 50, y: 50)))
+        
+    }
+    
+    func breadthFirstSearch(idStart:Int)-> Int {
+        
     }
 }
+
+
