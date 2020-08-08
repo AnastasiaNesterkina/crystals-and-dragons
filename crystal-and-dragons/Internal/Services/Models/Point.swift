@@ -9,5 +9,5 @@
 import Foundation
 
 struct Point {
-    var x,y,z: Int
+    var x,y: Int
 }

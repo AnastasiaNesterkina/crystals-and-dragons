@@ -19,12 +19,32 @@ class Context {
         
         for i in 0...N-1 {
             for j in 0...M-1 {
-                self.rooms.append(Room(id: i*M+j, M:M, N:N))
+                self.rooms.append(Room(id: i * M + j))
+                rooms.last?.generateDoors(M, N)
+                rooms.last?.generateThings()
             }
         }
-        //TO DO: connect unlinking doors in rooms
         
-        let playersRoom = Int.random(in: 0...M*N-1)
+        // Connect unlinking doors in rooms
+        // TO DO: try escape repeating operations
+        for room in rooms {
+            for i in 0...room.doors.count-1 {
+                let door = room.doors[i]
+                if door != -1 {
+                    var id = room.id
+                    switch i {
+                    case 0: id -= 1
+                    case 1: id += 1
+                    case 2: id += M
+                    case 3: id -= M
+                    default: break
+                    }
+                    rooms[door].doors[id] = room.id
+                }
+            }
+        }
+        
+        let playersRoom = Int.random(in: 0...M * N - 1)
         self.player = Player(idRoom: playersRoom)
     }
 }

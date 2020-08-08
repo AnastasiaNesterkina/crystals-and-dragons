@@ -14,49 +14,68 @@ class Room {
     var doors: [Int] = [-1, -1, -1, -1]
     var things: [Thing] = []
     
-    init(id: Int, M: Int, N: Int) {
+    init(id: Int) {
         self.id = id
-        
+    }
+    
+    func generateDoors(_ M: Int, _ N: Int) {
+        doors = [-1, -1, -1, -1]
         // rooms count > 1
         if N > 1 && M > 1 {
             // determine in which direction the doors can be installed
             var exceptions: Set<Int> = []
-            let i = id/M, j = id%M
+            let i = id / M, j = id % M
             if j == 0 {
                 exceptions.insert(0)
             }
-            if j == M-1 {
+            if j == M - 1 {
                 exceptions.insert(1)
             }
             if i == 0 {
                 exceptions.insert(3)
             }
-            if i == N-1 {
+            if i == N - 1 {
                 exceptions.insert(2)
             }
             let sides: Set<Int> = [0, 1, 2, 3] //left, right, bottom, top
-            let directions = Array<Int>(sides.subtracting(exceptions))
+            let directions = sides.subtracting(exceptions)
             
             // install the doors
             let doorsCount = Int.random(in: 1...directions.count)
             for _ in 0...doorsCount {
-                let idSide = Int.random(in: 0...directions.count-1)
-                let direction = directions[idSide]
+                let direction = directions.randomElement()
                 switch direction {
-                case 0:
-                    doors[0] = id-1
-                case 1:
-                    doors[1] = id+1
-                case 2:
-                    doors[2] = id-M
-                case 3:
-                    doors[3] = id+M
+                case 0: doors[0] = id - 1
+                case 1: doors[1] = id + 1
+                case 2: doors[2] = id - M
+                case 3: doors[3] = id + M
                 default:
                     break
                 }
             }
+        }
+    }
+    
+    func generateThings() {
+        things = []
+        // Add random things
+        let countThings = Int.random(in: 0...4)
+        let things = Set<Things>(Things.allCases)
+            .subtracting(Set<Things>([.key, .box]))
             
-            //TO DO: Add random things
+        for i in 0...countThings {
+            if let thing = things.randomElement() {
+                var coordinate = Point(x: 0, y: 0)
+                switch i {
+                case 1: coordinate = Point(x: 100, y: 0)
+                case 2: coordinate = Point(x: 0, y: 100)
+                case 3: coordinate = Point(x: 100, y: 100)
+                default:
+                    break
+                }
+                self.things.append(Thing(name: thing,
+                                         coordinate: coordinate))
+            }
         }
     }
 }

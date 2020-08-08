@@ -7,7 +7,7 @@
 //
 
 import Foundation
-enum Things {
+enum Things: CaseIterable {
     case key
     case box
     case stone
