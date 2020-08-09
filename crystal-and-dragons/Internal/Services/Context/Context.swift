@@ -38,7 +38,7 @@ class Context {
         let playerRoom = Int.random(in: 0...M * N - 1)
         self.player = Player(idRoom: playerRoom)
         
-        //TO DO: find the place for key and box; calculate steps
+        // Player can go to these rooms
         var playerRooms: [Int] = [playerRoom]
         for room in playerRooms {
             for door in rooms[room].doors {
@@ -47,6 +47,8 @@ class Context {
                 }
             }
         }
+        
+        // Find the place for key and box
         let idBoxRoom = playerRooms[Int.random(in: 0..<playerRooms.count)]
         let idKeyRoom = playerRooms[Int.random(in: 0..<playerRooms.count)]
         rooms[idBoxRoom].things.append(Thing(name: .box,
@@ -54,10 +56,46 @@ class Context {
         rooms[idKeyRoom].things.append(Thing(name: .key,
                                              coordinate: Point(x: 50, y: 50)))
         
+        // Calculate steps
+        self.player.steps = Context.breadthFirstSearch(idStart: playerRoom,
+                                                       idEnd: idKeyRoom,
+                                                       rooms: self.rooms)
+        self.player.steps += Context.breadthFirstSearch(idStart: idKeyRoom,
+                                                        idEnd: idBoxRoom,
+                                                        rooms: self.rooms)
     }
     
-    func breadthFirstSearch(idStart:Int)-> Int {
+    static private func breadthFirstSearch(idStart:Int, idEnd: Int, rooms: [Room])-> Int {
+        var queue = [idStart]
+        var visitedRooms: Set<Int> = [idStart]
+        var parent: [Int: Int] = [idStart: idStart]
         
+        while let visitedRoom = queue.first {
+            queue.removeFirst()
+            
+            if visitedRoom == idEnd {
+                break
+            }
+            for door in rooms[visitedRoom].doors {
+                if !visitedRooms.contains(door) {
+                    queue.append(door)
+                    visitedRooms.insert(door)
+                    parent[door] = visitedRoom
+                }
+            }
+        }
+        
+        var room = idEnd
+        var lengthWay = 0
+        while room != idStart {
+            guard let parent = parent[room] else {
+                return -1
+            }
+            room = parent
+            lengthWay += 1
+        }
+        
+        return lengthWay
     }
 }
 
