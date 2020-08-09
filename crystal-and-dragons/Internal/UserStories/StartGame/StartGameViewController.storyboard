@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WsD-bV-GJE">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--StartGameViewController-->
+        <scene sceneID="j8M-lF-ANT">
+            <objects>
+                <viewController storyboardIdentifier="StartGameViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="WsD-bV-GJE" userLabel="StartGameViewController" customClass="StartGameViewController" customModule="crystal_and_dragons" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wXN-9c-yjn" userLabel="ContentView">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Crystals &amp; Dragons" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ff-kv-vcK" userLabel="Crystals&amp;Dragons">
+                                <rect key="frame" x="65.5" y="144" width="283.5" height="44.5"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="34"/>
+                                <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EML-7f-iyB" userLabel="StartButton">
+                                <rect key="frame" x="106" y="308.5" width="202" height="46"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="31"/>
+                                <state key="normal" title="Start new game">
+                                    <color key="titleColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rJH-Wz-bYf" userLabel="MTextField">
+                                <rect key="frame" x="107" y="394.5" width="80" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="kFh-eL-hKq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="x" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QzR-L1-XPk">
+                                <rect key="frame" x="197" y="394.5" width="20" height="30.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="VRj-XW-7UR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="28"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b4P-j0-s2w" userLabel="NTextField">
+                                <rect key="frame" x="227" y="394.5" width="80" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="rooms" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wx9-0G-Tf9" userLabel="rooms">
+                                <rect key="frame" x="180" y="433" width="54" height="24"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="22"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="EML-7f-iyB" firstAttribute="centerX" secondItem="rpT-kD-AGz" secondAttribute="centerX" id="2Vj-Mc-UfU"/>
+                            <constraint firstItem="EML-7f-iyB" firstAttribute="top" secondItem="0ff-kv-vcK" secondAttribute="bottom" constant="120" id="648-mJ-MUi"/>
+                            <constraint firstItem="Wx9-0G-Tf9" firstAttribute="top" secondItem="QzR-L1-XPk" secondAttribute="bottom" constant="8" id="JyN-0r-7tb"/>
+                            <constraint firstItem="QzR-L1-XPk" firstAttribute="centerX" secondItem="rpT-kD-AGz" secondAttribute="centerX" id="RgZ-rs-krJ"/>
+                            <constraint firstItem="rJH-Wz-bYf" firstAttribute="top" secondItem="QzR-L1-XPk" secondAttribute="top" id="YAg-WP-H8e"/>
+                            <constraint firstItem="b4P-j0-s2w" firstAttribute="top" secondItem="QzR-L1-XPk" secondAttribute="top" id="Zcf-2j-f01"/>
+                            <constraint firstItem="QzR-L1-XPk" firstAttribute="leading" secondItem="rJH-Wz-bYf" secondAttribute="trailing" constant="10" id="g2V-Rc-dCK"/>
+                            <constraint firstItem="QzR-L1-XPk" firstAttribute="top" secondItem="EML-7f-iyB" secondAttribute="bottom" constant="40" id="htZ-CI-Ylr"/>
+                            <constraint firstItem="Wx9-0G-Tf9" firstAttribute="centerX" secondItem="QzR-L1-XPk" secondAttribute="centerX" id="iGu-Ge-1QF"/>
+                            <constraint firstItem="b4P-j0-s2w" firstAttribute="width" secondItem="rJH-Wz-bYf" secondAttribute="width" id="kbI-4n-AMU"/>
+                            <constraint firstItem="b4P-j0-s2w" firstAttribute="leading" secondItem="QzR-L1-XPk" secondAttribute="trailing" constant="10" id="ovg-2e-kcC"/>
+                            <constraint firstItem="0ff-kv-vcK" firstAttribute="top" secondItem="rpT-kD-AGz" secondAttribute="top" constant="100" id="pQO-AS-CCL"/>
+                            <constraint firstItem="0ff-kv-vcK" firstAttribute="centerX" secondItem="rpT-kD-AGz" secondAttribute="centerX" id="xFh-DU-fp9"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="rpT-kD-AGz"/>
+                    </view>
+                    <connections>
+                        <outlet property="contentView" destination="wXN-9c-yjn" id="loW-3C-7v0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CXg-ju-rgm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="414" y="-66"/>
+        </scene>
+    </scenes>
+</document>
