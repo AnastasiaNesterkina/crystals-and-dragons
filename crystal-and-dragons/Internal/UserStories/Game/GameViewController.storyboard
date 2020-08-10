@@ -11,7 +11,7 @@
         <!--GameViewController-->
         <scene sceneID="7zJ-KU-a2U">
             <objects>
-                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="0Mn-pl-z0Y" userLabel="GameViewController" customClass="GameViewController" customModule="crystal_and_dragons" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GameViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0Mn-pl-z0Y" userLabel="GameViewController" customClass="GameViewController" customModule="crystal_and_dragons" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OrK-KV-Hag" userLabel="ContentView">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -25,24 +25,36 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Yv-Yr-oV1" userLabel="GameView">
                                 <rect key="frame" x="20" y="106" width="374" height="517"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TjP-rg-g1R" userLabel="TopButton">
-                                        <rect key="frame" x="164" y="0.0" width="46" height="30"/>
-                                        <state key="normal" title="Button"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TjP-rg-g1R" userLabel="TopButton">
+                                        <rect key="frame" x="161" y="0.0" width="52" height="52"/>
+                                        <state key="normal" image="upArrow"/>
+                                        <connections>
+                                            <action selector="didTapUpButton:" destination="0Mn-pl-z0Y" eventType="touchUpInside" id="Gep-om-hiR"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sJH-Us-IfE" userLabel="RightButton">
-                                        <rect key="frame" x="328" y="243.5" width="46" height="30"/>
-                                        <state key="normal" title="Button"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sJH-Us-IfE" userLabel="RightButton">
+                                        <rect key="frame" x="322" y="232.5" width="52" height="52"/>
+                                        <state key="normal" image="rightArrow"/>
+                                        <connections>
+                                            <action selector="didTapRightButton:" destination="0Mn-pl-z0Y" eventType="touchUpInside" id="8Qi-Ig-IX8"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h0U-Z4-MEf" userLabel="LeftButton">
-                                        <rect key="frame" x="0.0" y="243.5" width="46" height="30"/>
-                                        <state key="normal" title="Button"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h0U-Z4-MEf" userLabel="LeftButton">
+                                        <rect key="frame" x="0.0" y="232.5" width="52" height="52"/>
+                                        <state key="normal" image="leftArrow"/>
+                                        <connections>
+                                            <action selector="didTapLeftButton:" destination="0Mn-pl-z0Y" eventType="touchUpInside" id="WMT-be-5EX"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qrE-jW-RT8" userLabel="BottomButton">
-                                        <rect key="frame" x="164" y="487" width="46" height="30"/>
-                                        <state key="normal" title="Button"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qrE-jW-RT8" userLabel="BottomButton">
+                                        <rect key="frame" x="161" y="465" width="52" height="52"/>
+                                        <state key="normal" image="downArrow"/>
+                                        <connections>
+                                            <action selector="didTapBottomButton:" destination="0Mn-pl-z0Y" eventType="touchUpInside" id="7YH-O1-wNl"/>
+                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hf6-j4-iBK" userLabel="RoomView">
-                                        <rect key="frame" x="46" y="30" width="282" height="457"/>
+                                        <rect key="frame" x="52" y="52" width="270" height="413"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     </view>
                                 </subviews>
@@ -98,6 +110,9 @@
                                 <state key="normal" title="Use">
                                     <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="didTapUseButton:" destination="0Mn-pl-z0Y" eventType="touchUpInside" id="XBZ-if-8iq"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f8o-dZ-qBS">
                                 <rect key="frame" x="187" y="806" width="40" height="36"/>
@@ -105,6 +120,9 @@
                                 <state key="normal" title="Drop">
                                     <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="didTapDropButton:" destination="0Mn-pl-z0Y" eventType="touchUpInside" id="c5Z-Kk-0vb"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0rs-iK-rAO">
                                 <rect key="frame" x="328" y="806" width="66" height="36"/>
@@ -112,6 +130,9 @@
                                 <state key="normal" title="Discard">
                                     <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="DidTapDiscardButton:" destination="0Mn-pl-z0Y" eventType="touchUpInside" id="MuK-zb-LVT"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inventory" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N0V-lk-wpM">
                                 <rect key="frame" x="20" y="643" width="84" height="22"/>
@@ -144,10 +165,24 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="oqo-02-dnH"/>
                     </view>
+                    <connections>
+                        <outlet property="bottomButton" destination="qrE-jW-RT8" id="9y5-T4-h5J"/>
+                        <outlet property="leftButton" destination="h0U-Z4-MEf" id="0yp-Sn-h71"/>
+                        <outlet property="rightButton" destination="sJH-Us-IfE" id="roz-Ps-ydj"/>
+                        <outlet property="roomView" destination="hf6-j4-iBK" id="L1g-9f-MEE"/>
+                        <outlet property="stepsLeft" destination="H0e-Gi-iGi" id="wDv-u6-duY"/>
+                        <outlet property="topButton" destination="TjP-rg-g1R" id="GiH-fH-YmN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KEq-UP-08M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="15.942028985507248" y="68.973214285714278"/>
+            <point key="canvasLocation" x="203" y="42"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="downArrow" width="52" height="52"/>
+        <image name="leftArrow" width="52" height="52"/>
+        <image name="rightArrow" width="52" height="52"/>
+        <image name="upArrow" width="52" height="52"/>
+    </resources>
 </document>

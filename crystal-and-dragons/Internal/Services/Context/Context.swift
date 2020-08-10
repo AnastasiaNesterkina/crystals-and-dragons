@@ -18,8 +18,8 @@ class Context {
         self.N = N
         
         // Generate rooms
-        for i in 0...N-1 {
-            for j in 0...M-1 {
+        for i in 0..<N {
+            for j in 0..<M {
                 self.rooms.append(Room(id: i * M + j))
                 rooms.last?.generateThings()
             }
@@ -35,7 +35,7 @@ class Context {
             }
         }
         
-        let playerRoom = Int.random(in: 0...M * N - 1)
+        let playerRoom = Int.random(in: 0..<M*N)
         self.player = Player(idRoom: playerRoom)
         
         // Player can go to these rooms
@@ -43,7 +43,7 @@ class Context {
         for room in playerRooms {
             for door in rooms[room].doors {
                 if door != -1 && !playerRooms.contains(door) {
-                    playerRooms.append(room)
+                    playerRooms.append(door)
                 }
             }
         }
@@ -52,9 +52,11 @@ class Context {
         let idBoxRoom = playerRooms[Int.random(in: 0..<playerRooms.count)]
         let idKeyRoom = playerRooms[Int.random(in: 0..<playerRooms.count)]
         rooms[idBoxRoom].things.append(Thing(name: .box,
-                                             coordinate: Point(x: 50, y: 50)))
+                                             coordinate: Point(x: 50,
+                                                               y: 50)))
         rooms[idKeyRoom].things.append(Thing(name: .key,
-                                             coordinate: Point(x: 50, y: 50)))
+                                             coordinate: Point(x: 50,
+                                                               y: 0)))
         
         // Calculate steps
         self.player.steps = Context.breadthFirstSearch(idStart: playerRoom,
@@ -77,7 +79,7 @@ class Context {
                 break
             }
             for door in rooms[visitedRoom].doors {
-                if !visitedRooms.contains(door) {
+                if door != -1 && !visitedRooms.contains(door) {
                     queue.append(door)
                     visitedRooms.insert(door)
                     parent[door] = visitedRoom

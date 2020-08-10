@@ -27,6 +27,9 @@
                                 <state key="normal" title="Start new game">
                                     <color key="titleColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="didTapStartButton:" destination="WsD-bV-GJE" eventType="touchUpInside" id="ZcR-d2-s42"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rJH-Wz-bYf" userLabel="MTextField">
                                 <rect key="frame" x="107" y="394.5" width="80" height="34"/>
@@ -76,7 +79,8 @@
                         <viewLayoutGuide key="safeArea" id="rpT-kD-AGz"/>
                     </view>
                     <connections>
-                        <outlet property="contentView" destination="wXN-9c-yjn" id="loW-3C-7v0"/>
+                        <outlet property="mTextField" destination="rJH-Wz-bYf" id="EcF-G3-qo5"/>
+                        <outlet property="nTextField" destination="b4P-j0-s2w" id="uE3-Q9-KVw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CXg-ju-rgm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

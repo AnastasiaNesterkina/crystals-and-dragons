@@ -55,11 +55,11 @@ class Room {
                     doors[1] = id + 1
                     idChanges.append([id + 1, 0])
                 case 2:
-                    doors[2] = id - M
-                    idChanges.append([id - M, 3])
+                    doors[2] = id + M
+                    idChanges.append([id + M, 3])
                 case 3:
-                    doors[3] = id + M
-                    idChanges.append([id + M, 2])
+                    doors[3] = id - M
+                    idChanges.append([id - M, 2])
                 default:
                     break
                 }
@@ -75,7 +75,7 @@ class Room {
         let things = Set<Things>(Things.allCases)
             .subtracting(Set<Things>([.key, .box]))
             
-        for i in 0...countThings {
+        for i in 0..<countThings {
             if let thing = things.randomElement() {
                 var coordinate = Point(x: 0, y: 0)
                 switch i {
