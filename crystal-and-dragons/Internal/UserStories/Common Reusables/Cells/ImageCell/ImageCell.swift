@@ -18,8 +18,8 @@ class ImageCell: UICollectionViewCell {
     func setupImage(_ thingIn: Thing, width: CGFloat, height: CGFloat) {
         thingImage(thingIn.name)
         thing = thingIn
-        //thing?.coordinate.x %= Int(width)
-        //thing?.coordinate.y %= Int(height)
+        thing?.coordinate.x %= Int(width)
+        thing?.coordinate.y %= Int(height)
         if let view = image {
             view.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
             if !contentView.subviews.isEmpty {

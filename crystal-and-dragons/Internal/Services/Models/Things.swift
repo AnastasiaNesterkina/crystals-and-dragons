@@ -19,3 +19,12 @@ struct Thing {
     let name: Things
     var coordinate: Point
 }
+
+extension Thing: Equatable {
+    static func == (lhs: Thing, rhs: Thing) -> Bool {
+        if lhs.name == rhs.name && lhs.coordinate == rhs.coordinate {
+            return true
+        }
+        return false
+    }
+}
