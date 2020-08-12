@@ -19,7 +19,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak private var bottomButton: UIButton!
     
     var context: Context?
-    private var currentThing: Thing?
+    private var selectedThing: Thing?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +53,7 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func didTapUseButton(_ sender: Any) {
-        guard let thing = currentThing else { return }
+        guard let thing = selectedThing else { return }
         if thing.name == Things.key {
             for view in roomView.subviews {
                 if let image = view as? ImageCell,
@@ -67,6 +67,18 @@ class GameViewController: UIViewController {
                                         width: 50,
                                         height: 50)
                     view.removeFromSuperview()
+                    selectedThing = nil
+                    
+                    let alert = UIAlertController(
+                        title: "Congrats!",
+                        message: "You are winner!",
+                        preferredStyle: .alert
+                    )
+                    
+                    alert.addAction(UIAlertAction(title: "Ok!", style: .default, handler: { _ in
+                        self.dismiss(animated: true, completion: nil)
+                    }))
+                    self.present(alert, animated: true)
                     break
                 }                
             }
@@ -74,17 +86,43 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func didTapDropButton(_ sender: Any) {
-        
+        guard let thing = selectedThing, let context = context else {
+            return
+        }
+        let image = ImageCell()
+        image.setupImage(thing, width: roomView.frame.width,
+                         height: roomView.frame.height)
+        roomView.addSubview(image)
+        roomView.subviews.last?.frame = CGRect(x: thing.coordinate.x,
+                                               y: thing.coordinate.y,
+                                               width: 50,
+                                               height: 50)
+        let tap = UITapGestureRecognizer(target: self,
+                                         action: #selector(self
+                                                .didTapImage(_:)))
+        roomView.subviews.last?.addGestureRecognizer(tap)
+        roomView.subviews.last?.isUserInteractionEnabled = true
+        context.rooms[context.player.idRoom].things.append(thing)
+        let inventory = context.player.inventory
+        for i in 0..<inventory.count {
+            if inventory[i] == thing {
+                context.player.inventory.remove(at: i)
+                inventoryCollectionView.reloadData()
+                selectedThing = nil
+                break
+            }
+        }
     }
     
     @IBAction func DidTapDiscardButton(_ sender: Any) {
-        guard let thing = currentThing, let context = context,
+        guard let thing = selectedThing, let context = context,
             thing.name != Things.key else { return }
         let inventory = context.player.inventory
         for i in 0..<inventory.count {
             if inventory[i] == thing {
                 context.player.inventory.remove(at: i)
                 inventoryCollectionView.reloadData()
+                selectedThing = nil
                 break
             }
         }
@@ -102,6 +140,19 @@ private extension GameViewController {
         context.player.idRoom = context.rooms[idRoom].doors[direction]
         context.player.steps -= 1
         draw()
+        
+        if context.player.steps == 0 && (!isRoomThing(Things.box) || !(isRoomThing(.key) || isInventoryThing(.key))){
+            let alert = UIAlertController(
+                title: "I'm sorry...",
+                message: "You lose... But you can try again!",
+                preferredStyle: .alert
+            )
+            
+            alert.addAction(UIAlertAction(title: "Ok!", style: .default, handler: { _ in
+                self.dismiss(animated: true, completion: nil)
+            }))
+            self.present(alert, animated: true)
+        }
     }
     
     func draw() {
@@ -210,7 +261,7 @@ private extension GameViewController {
 extension GameViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let context = context else { return }
-        currentThing = context.player.inventory[indexPath.row]
+        selectedThing = context.player.inventory[indexPath.row]
     }
 }
 
@@ -231,4 +282,27 @@ extension GameViewController: UICollectionViewDataSource {
         return context.player.inventory.count
     }
     
+}
+
+// MARK: - Thing belonging func
+private extension GameViewController {
+    func isRoomThing(_ thing: Things) -> Bool {
+        for view in roomView.subviews {
+            if let image = view as? ImageCell,
+                image.thing?.name == thing {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func isInventoryThing(_ thing: Things) -> Bool {
+        guard let inventory = context?.player.inventory else { return false }
+        for elem in inventory {
+            if elem.name == thing {
+                return true
+            }
+        }
+        return false
+    }
 }
