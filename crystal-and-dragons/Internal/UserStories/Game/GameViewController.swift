@@ -53,7 +53,24 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func didTapUseButton(_ sender: Any) {
-        
+        guard let thing = currentThing else { return }
+        if thing.name == Things.key {
+            for view in roomView.subviews {
+                if let image = view as? ImageCell,
+                    image.thing?.name == Things.box,
+                    let thing = image.thing {
+                    roomView.addSubview(UIImageView(image: UIImage(named:
+                        Constants.PicturesNames.IconNames.openedBox)))
+                    roomView.subviews.last?
+                        .frame = CGRect(x: thing.coordinate.x,
+                                        y: thing.coordinate.y,
+                                        width: 50,
+                                        height: 50)
+                    view.removeFromSuperview()
+                    break
+                }                
+            }
+        }
     }
     
     @IBAction func didTapDropButton(_ sender: Any) {
@@ -160,11 +177,19 @@ private extension GameViewController {
 private extension GameViewController {
    @objc func didTapImage(_ sender: UITapGestureRecognizer) {
         guard let view = sender.view else { return }
-        guard let player = context?.player else { return }
+        guard let context = context else { return }
         if roomView.subviews.contains(view) {
             if let image = view as? ImageCell, let thing = image.thing,
-                player.inventory.count < 5 {
-                player.inventory.append(thing)
+                context.player.inventory.count < 5 {
+                context.player.inventory.append(thing)
+                let id = context.player.idRoom
+                let things = context.rooms[id].things
+                for i in 0..<things.count {
+                    if thing == things[i] {
+                        context.rooms[id].things.remove(at: i)
+                        break
+                    }
+                }
                 view.removeFromSuperview()
                 inventoryCollectionView.reloadData()
             }

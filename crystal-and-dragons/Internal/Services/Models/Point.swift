@@ -11,3 +11,13 @@ import Foundation
 struct Point {
     var x,y: Int
 }
+
+extension Point: Equatable {
+    static func == (lhs: Point, rhs: Point) -> Bool {
+        if lhs.x == rhs.x && lhs.y == rhs.y {
+            return true
+        }
+        return false
+    }
+    
+}
