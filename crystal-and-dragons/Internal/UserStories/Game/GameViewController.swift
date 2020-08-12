@@ -78,7 +78,16 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func DidTapDiscardButton(_ sender: Any) {
-        
+        guard let thing = currentThing, let context = context,
+            thing.name != Things.key else { return }
+        let inventory = context.player.inventory
+        for i in 0..<inventory.count {
+            if inventory[i] == thing {
+                context.player.inventory.remove(at: i)
+                inventoryCollectionView.reloadData()
+                break
+            }
+        }
     }
 }
 
