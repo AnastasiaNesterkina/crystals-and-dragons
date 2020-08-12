@@ -11,12 +11,18 @@ import UIKit
 class GameViewController: UIViewController {
     @IBOutlet weak private var stepsLeft: UILabel!
     @IBOutlet weak private var roomView: UIView!
-    @IBOutlet weak var inventoryCollectionView: UICollectionView!
+    @IBOutlet weak private var inventoryCollectionView: UICollectionView!
     
     @IBOutlet weak private var topButton: UIButton!
     @IBOutlet weak private var rightButton: UIButton!
     @IBOutlet weak private var leftButton: UIButton!
     @IBOutlet weak private var bottomButton: UIButton!
+    
+    @IBOutlet weak private var useButton: UIButton!
+    @IBOutlet weak private var dropButton: UIButton!
+    @IBOutlet weak private var discardButton: UIButton!
+    
+    @IBOutlet weak var thingDescription: UILabel!
     
     var context: Context?
     private var selectedThing: Thing?
@@ -67,7 +73,12 @@ class GameViewController: UIViewController {
                                         width: 50,
                                         height: 50)
                     view.removeFromSuperview()
+                    
                     selectedThing = nil
+                    useButton.isEnabled = false
+                    dropButton.isEnabled = false
+                    discardButton.isEnabled = false
+                    thingDescription.text = ""
                     
                     let alert = UIAlertController(
                         title: "Congrats!",
@@ -109,6 +120,11 @@ class GameViewController: UIViewController {
                 context.player.inventory.remove(at: i)
                 inventoryCollectionView.reloadData()
                 selectedThing = nil
+                useButton.isEnabled = false
+                dropButton.isEnabled = false
+                discardButton.isEnabled = false
+                thingDescription.text = ""
+
                 break
             }
         }
@@ -123,6 +139,11 @@ class GameViewController: UIViewController {
                 context.player.inventory.remove(at: i)
                 inventoryCollectionView.reloadData()
                 selectedThing = nil
+                useButton.isEnabled = false
+                dropButton.isEnabled = false
+                discardButton.isEnabled = false
+                thingDescription.text = ""
+                
                 break
             }
         }
@@ -262,6 +283,10 @@ extension GameViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let context = context else { return }
         selectedThing = context.player.inventory[indexPath.row]
+        useButton.isEnabled = true
+        dropButton.isEnabled = true
+        discardButton.isEnabled = true
+        thingDescription.text =  selectedThing?.description ?? ""
     }
 }
 

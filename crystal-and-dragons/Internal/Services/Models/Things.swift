@@ -18,6 +18,7 @@ enum Things: CaseIterable {
 struct Thing {
     let name: Things
     var coordinate: Point
+    let description: String
 }
 
 extension Thing: Equatable {

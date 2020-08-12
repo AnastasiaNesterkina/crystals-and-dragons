@@ -53,10 +53,12 @@ class Context {
         let idKeyRoom = playerRooms[Int.random(in: 0..<playerRooms.count)]
         rooms[idBoxRoom].things.append(Thing(name: .box,
                                              coordinate: Point(x: 50,
-                                                               y: 50)))
+                                                               y: 50),
+                                             description: "box"))
         rooms[idKeyRoom].things.append(Thing(name: .key,
                                              coordinate: Point(x: 50,
-                                                               y: 0)))
+                                                               y: 0),
+                                             description: "key"))
         
         // Calculate steps
         self.player.steps = Context.breadthFirstSearch(idStart: playerRoom,

@@ -85,8 +85,20 @@ class Room {
                 default:
                     break
                 }
+                var description = ""
+                switch thing {
+                case Things.bone:
+                    description = "Bone"
+                case Things.mushroom:
+                    description = "Mushroom"
+                case Things.stone:
+                    description = "Stone"
+                default:
+                    break
+                }
                 self.things.append(Thing(name: thing,
-                                         coordinate: coordinate))
+                                         coordinate: coordinate,
+                                         description: description))
             }
         }
     }

@@ -156,12 +156,16 @@
                     </view>
                     <connections>
                         <outlet property="bottomButton" destination="qrE-jW-RT8" id="9y5-T4-h5J"/>
+                        <outlet property="discardButton" destination="0rs-iK-rAO" id="OLV-fO-K21"/>
+                        <outlet property="dropButton" destination="f8o-dZ-qBS" id="0Ch-R7-tiY"/>
                         <outlet property="inventoryCollectionView" destination="Prz-kf-IUO" id="4NE-8W-HCV"/>
                         <outlet property="leftButton" destination="h0U-Z4-MEf" id="0yp-Sn-h71"/>
                         <outlet property="rightButton" destination="sJH-Us-IfE" id="roz-Ps-ydj"/>
                         <outlet property="roomView" destination="hf6-j4-iBK" id="L1g-9f-MEE"/>
                         <outlet property="stepsLeft" destination="H0e-Gi-iGi" id="wDv-u6-duY"/>
+                        <outlet property="thingDescription" destination="msw-J9-TWZ" id="0lL-XW-HRe"/>
                         <outlet property="topButton" destination="TjP-rg-g1R" id="GiH-fH-YmN"/>
+                        <outlet property="useButton" destination="lUV-GU-49s" id="l52-ms-6tV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KEq-UP-08M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
