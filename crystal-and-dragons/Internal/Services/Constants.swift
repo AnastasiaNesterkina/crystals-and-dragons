@@ -20,11 +20,11 @@ internal enum Constants {
 
 
     internal enum NibNames {
-        
+        internal static let imageCellNib = "ImageCell"
     }
     
     internal enum CellReuseIdentifiers {
-        
+        internal static let imageCell = "ImageCell"
     }
         
         

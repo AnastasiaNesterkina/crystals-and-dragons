@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -23,7 +22,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Yv-Yr-oV1" userLabel="GameView">
-                                <rect key="frame" x="20" y="106" width="374" height="517"/>
+                                <rect key="frame" x="20" y="106" width="374" height="547"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TjP-rg-g1R" userLabel="TopButton">
                                         <rect key="frame" x="161" y="0.0" width="52" height="52"/>
@@ -33,28 +32,28 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sJH-Us-IfE" userLabel="RightButton">
-                                        <rect key="frame" x="322" y="232.5" width="52" height="52"/>
+                                        <rect key="frame" x="322" y="247.5" width="52" height="52"/>
                                         <state key="normal" image="rightArrow"/>
                                         <connections>
                                             <action selector="didTapRightButton:" destination="0Mn-pl-z0Y" eventType="touchUpInside" id="8Qi-Ig-IX8"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h0U-Z4-MEf" userLabel="LeftButton">
-                                        <rect key="frame" x="0.0" y="232.5" width="52" height="52"/>
+                                        <rect key="frame" x="0.0" y="247.5" width="52" height="52"/>
                                         <state key="normal" image="leftArrow"/>
                                         <connections>
                                             <action selector="didTapLeftButton:" destination="0Mn-pl-z0Y" eventType="touchUpInside" id="WMT-be-5EX"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qrE-jW-RT8" userLabel="BottomButton">
-                                        <rect key="frame" x="161" y="465" width="52" height="52"/>
+                                        <rect key="frame" x="161" y="495" width="52" height="52"/>
                                         <state key="normal" image="downArrow"/>
                                         <connections>
                                             <action selector="didTapBottomButton:" destination="0Mn-pl-z0Y" eventType="touchUpInside" id="7YH-O1-wNl"/>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hf6-j4-iBK" userLabel="RoomView">
-                                        <rect key="frame" x="52" y="52" width="270" height="413"/>
+                                        <rect key="frame" x="52" y="52" width="270" height="443"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     </view>
                                 </subviews>
@@ -75,28 +74,18 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Prz-kf-IUO" userLabel="InventoryCollectionView">
-                                <rect key="frame" x="20" y="675" width="374" height="80"/>
+                                <rect key="frame" x="20" y="705" width="374" height="50"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="M6E-fY-31c"/>
+                                    <constraint firstAttribute="height" constant="50" id="M6E-fY-31c"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="C7q-lg-1rd">
-                                    <size key="itemSize" width="80" height="80"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="C7q-lg-1rd">
+                                    <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="7QJ-gU-XGk">
-                                        <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Ii1-56-jnR">
-                                            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </collectionViewCellContentView>
-                                        <size key="customSize" width="80" height="80"/>
-                                    </collectionViewCell>
-                                </cells>
+                                <cells/>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ThingDescription" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="msw-J9-TWZ">
                                 <rect key="frame" x="20" y="765" width="130" height="21"/>
@@ -135,7 +124,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inventory" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N0V-lk-wpM">
-                                <rect key="frame" x="20" y="643" width="84" height="22"/>
+                                <rect key="frame" x="20" y="673" width="84" height="22"/>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="20"/>
                                 <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -167,6 +156,7 @@
                     </view>
                     <connections>
                         <outlet property="bottomButton" destination="qrE-jW-RT8" id="9y5-T4-h5J"/>
+                        <outlet property="inventoryCollectionView" destination="Prz-kf-IUO" id="4NE-8W-HCV"/>
                         <outlet property="leftButton" destination="h0U-Z4-MEf" id="0yp-Sn-h71"/>
                         <outlet property="rightButton" destination="sJH-Us-IfE" id="roz-Ps-ydj"/>
                         <outlet property="roomView" destination="hf6-j4-iBK" id="L1g-9f-MEE"/>
@@ -176,7 +166,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KEq-UP-08M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="203" y="42"/>
+            <point key="canvasLocation" x="202.89855072463769" y="41.517857142857139"/>
         </scene>
     </scenes>
     <resources>

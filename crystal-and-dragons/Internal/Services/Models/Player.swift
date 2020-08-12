@@ -11,7 +11,7 @@ import Foundation
 class Player {
     var idRoom: Int
     var steps = 100
-    var inventary: [Thing] = []
+    var inventory: [Thing] = []
     
     init(idRoom: Int) {
         self.idRoom = idRoom

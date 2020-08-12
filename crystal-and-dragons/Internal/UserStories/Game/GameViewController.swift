@@ -11,6 +11,7 @@ import UIKit
 class GameViewController: UIViewController {
     @IBOutlet weak private var stepsLeft: UILabel!
     @IBOutlet weak private var roomView: UIView!
+    @IBOutlet weak var inventoryCollectionView: UICollectionView!
     
     @IBOutlet weak private var topButton: UIButton!
     @IBOutlet weak private var rightButton: UIButton!
@@ -18,12 +19,19 @@ class GameViewController: UIViewController {
     @IBOutlet weak private var bottomButton: UIButton!
     
     var context: Context?
+    private var currentThing: Thing?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let steps = context?.player.steps {
-            stepsLeft.text = "Steps left: " + String(steps)
-        }
+        
+        let imageCellNib = UINib(nibName: Constants.NibNames.imageCellNib,
+                                 bundle: nil)
+        inventoryCollectionView.delegate = self
+        inventoryCollectionView.dataSource = self
+        inventoryCollectionView
+            .register(imageCellNib,
+                      forCellWithReuseIdentifier: Constants.CellReuseIdentifiers.imageCell)
+        
         draw()
     }
     
@@ -57,15 +65,22 @@ class GameViewController: UIViewController {
     }
 }
 
+// MARK: - Draw room
 private extension GameViewController {
     func nextDoor(_ direction: Int) {
-        guard let context = context else { return }
+        guard let context = context, context.player.steps != 0 else {
+            return
+        }
+        
         let idRoom = context.player.idRoom
         context.player.idRoom = context.rooms[idRoom].doors[direction]
+        context.player.steps -= 1
         draw()
     }
     
     func draw() {
+        guard let context = context else { return }
+        stepsLeft.text = "Steps left: " + String(context.player.steps)
         drawDoors()
         drawThings()
     }
@@ -82,35 +97,22 @@ private extension GameViewController {
         
         // Insert things to the room
         for thing in things {
-            let image: UIImageView?
-            
-            switch thing.name {
-            case Things.key:
-                image = UIImageView(image: UIImage(named: Constants
-                    .PicturesNames.IconNames.key))
-            case Things.box:
-                image = UIImageView(image: UIImage(named: Constants
-                    .PicturesNames.IconNames.closedBox))
-            case Things.bone:
-                image = UIImageView(image: UIImage(named: Constants
-                    .PicturesNames.IconNames.bone))
-            case Things.mushroom:
-                image = UIImageView(image: UIImage(named: Constants
-                    .PicturesNames.IconNames.mushroom))
-            case Things.stone:
-                image = UIImageView(image: UIImage(named: Constants
-                    .PicturesNames.IconNames.stone))
-            }
-            
-            guard let img = image else {
-                break
-            }
-            
-            roomView.addSubview(img)
+            let image = ImageCell()
+            image.setupImage(thing, width: roomView.frame.width,
+                             height: roomView.frame.height)
+            roomView.addSubview(image)
             roomView.subviews.last?.frame = CGRect(x: thing.coordinate.x,
                                                    y: thing.coordinate.y,
                                                    width: 50,
                                                    height: 50)
+            if(thing.name != Things.box) {
+                let tap = UITapGestureRecognizer(target: self,
+                                                 action: #selector(self
+                                                    .didTapImage(_:)))
+                roomView.subviews.last?.addGestureRecognizer(tap)
+                roomView.subviews.last?.isUserInteractionEnabled = true
+            }
+            
         }
     }
     
@@ -138,7 +140,6 @@ private extension GameViewController {
                     bottomButton.isEnabled = false
                 } else {
                     bottomButton.isEnabled = true
-                    
                 }
             case 3:
                 if doors[i] == -1 {
@@ -151,4 +152,49 @@ private extension GameViewController {
             }
         }
     }
+    
+    
+}
+
+// MARK: - Tap Image
+private extension GameViewController {
+   @objc func didTapImage(_ sender: UITapGestureRecognizer) {
+        guard let view = sender.view else { return }
+        guard let player = context?.player else { return }
+        if roomView.subviews.contains(view) {
+            if let image = view as? ImageCell, let thing = image.thing,
+                player.inventory.count < 5 {
+                player.inventory.append(thing)
+                view.removeFromSuperview()
+                inventoryCollectionView.reloadData()
+            }
+        }
+    }
+}
+
+// MARK: - Collection Delegate
+extension GameViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let context = context else { return }
+        currentThing = context.player.inventory[indexPath.row]
+    }
+}
+
+extension GameViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let context = context else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.CellReuseIdentifiers.imageCell, for: indexPath) as? ImageCell else {
+                       return UICollectionViewCell()
+        }
+        cell.setupImage(context.player.inventory[indexPath.row],
+                        width: roomView.frame.width,
+                        height: roomView.frame.height)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard let context = context else { return 0 }
+        return context.player.inventory.count
+    }
+    
 }
